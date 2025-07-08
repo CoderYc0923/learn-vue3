@@ -1,0 +1,40 @@
+{
+  "name": "@learn-vue3/reactivity",
+  "version": "1.0.0",
+  "description": "learn-vue3/reactivity",
+  "main": "src/index.js",
+  "files": [
+    "index.js",
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build"
+  },
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CoderYc0923/learn-vue3.git",
+    "directory": "packages/reactivity"
+  },
+  "buildOptions": {
+    "name": "LearnVueReactivity",
+    "formats": [
+      "esm-bundler",
+      "esm-browser",
+      "cjs",
+      "global"
+    ]
+  },
+  "keywords": [
+    "vue"
+  ],
+  "author": "YC",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CoderYc0923/learn-vue3/issues"
+  },
+  "homepage": "https://github.com/CoderYc0923/learn-vue3/main/packages/reactivity#readme",
+  "dependencies": {
+    "@learn-vue3/shared": "workspace:*"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "name": "@learn-vue3/shared",
+  "version": "1.0.0",
+  "description": "learn-vue3/shared",
+  "main": "src/index.js",
+  "files": [
+    "index.js",
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CoderYc0923/learn-vue3.git",
+    "directory": "packages/shared"
+  },
+  "buildOptions": {
+    "name": "LearnVueUtils",
+    "formats": [
+      "esm-bundler",
+      "esm-browser",
+      "cjs",
+      "global"
+    ]
+  },
+  "keywords": [
+    "vue"
+  ],
+  "author": "YC",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CoderYc0923/learn-vue3/issues"
+  },
+  "homepage": "https://github.com/CoderYc0923/learn-vue3/main/packages/shared#readme"
+}

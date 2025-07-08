@@ -1,0 +1,29 @@
+{
+  "name": "learn-vue3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build-js": "node scripts/build.js",
+    "build-vite": "vite build",
+    "build-w": "node scripts/build-all-packages.js",
+    "preview": "vite preview",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.11.1",
+  "devDependencies": {
+    "@babel/parser": "^7.0.2",
+    "magic-string": "^0.30.17",
+    "picocolors": "^1.1.1",
+    "pretty-bytes": "^6.1.1",
+    "vite": "^7.0.2"
+  },
+  "dependencies": {
+    "@learn-vue3/shared": "workspace:*"
+  }
+}
