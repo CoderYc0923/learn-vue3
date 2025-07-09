@@ -1,4 +1,5 @@
 import { reactive } from './reactive'
+import { track, trigger } from './dep'
 import { isObject } from '@learn-vue3/shared'
 
 class BaseReactiveHandler {
@@ -14,6 +15,9 @@ class BaseReactiveHandler {
      */
     get(target, key, receiver) {
         const res = Reflect.get(target, key, receiver)
+
+        //依赖收集
+        track(target, key)
 
         //深度代理
         if (isObject(res)) {
@@ -39,6 +43,9 @@ class MutableReactiveHandler extends BaseReactiveHandler {
      */
     set(target, key, value, receiver) {
         const res = Reflect.set(target, key, value, receiver)
+
+        //执行对应的副作用
+        trigger(target, key)
 
         return res
     }
