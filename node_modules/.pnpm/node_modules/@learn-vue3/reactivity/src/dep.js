@@ -4,32 +4,38 @@ import { activeEffect } from "./effect";
  * 依赖Set
  */
 export class Dep {
+  constructor() {}
 
-    constructor() { }
+  /**
+   * 当前依赖版本
+   */
+  version = 0;
 
-    /**
-     * 当前依赖版本
-     */
-    version = 0
+  effects = new Set();
 
-    effects = new Set()
+  track() {
+    if (!this.effects.has(activeEffect)) {
+      this.effects.add(activeEffect);
 
-    track() {
-       if (!this.effects.has(activeEffect)) {
-            this.effects.add(activeEffect)
-            
-            activeEffect.deps.push(this)
-       } 
+      if (!activeEffect.deps.has(this)) {
+        activeEffect.deps.add(this);
+      }
     }
-    triggr() { 
-        this.notify()
-    }
-    notify() {
-        effects.forEach((effect) => effect())
-    }
+  }
+  trigger() {
+    this.notify();
+  }
+  notify() {
+    this.effects.forEach((effect) => {
+      effect.run();
+    });
+  }
+  delete(effect) {
+    this.effects.delete(effect);
+  }
 }
 
-export const targetMap = new WeakMap()
+export const targetMap = new WeakMap();
 
 /**
  * 追踪对reactive对象属性的所有访问（依赖收集）
@@ -38,22 +44,22 @@ export const targetMap = new WeakMap()
  */
 
 export function track(target, key) {
-    //当前活动的副作用
-    if (!activeEffect) return
+  //当前活动的副作用
+  if (!activeEffect) return;
 
-    //获取目标对象的依赖Map
-    let depsMap = targetMap.get(target)
-    if (!depsMap) {
-        targetMap.set(target, (depsMap = new Map()))
-    }
+  //获取目标对象的依赖Map
+  let depsMap = targetMap.get(target);
+  if (!depsMap) {
+    targetMap.set(target, (depsMap = new Map()));
+  }
 
-    //获取对应key的依赖Set
-    let dep = depsMap.get(key)
-    if (!dep) {
-        depsMap.set(key, (dep = new Dep()))
-    }
+  //获取对应key的依赖Set
+  let dep = depsMap.get(key);
+  if (!dep) {
+    depsMap.set(key, (dep = new Dep()));
+  }
 
-    dep.track()
+  dep.track();
 }
 
 /**
@@ -63,11 +69,11 @@ export function track(target, key) {
  */
 
 export function trigger(target, key) {
-    let depsMap = targetMap.get(target)
-    if (!depsMap) return
+  let depsMap = targetMap.get(target);
+  if (!depsMap) return;
 
-    let dep = depsMap.get(key)
-    if (!dep) return
+  let dep = depsMap.get(key);
+  if (!dep) return;
 
-    dep.trigger()
+  dep.trigger();
 }

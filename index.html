@@ -1,27 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    <div id="app">test</div>
+  </head>
+  <body>
+    <div id="app">
+      <button id="addAgeBtn">年龄增加</button>
+      <button id="clearBtn">停止副作用</button>
+    </div>
     <script type="module">
-        import { reactive } from './packages/reactivity/src'
+      import { reactive, watchEffect } from "./packages/reactivity/src";
 
-        const testObj = {
-            name: 'yc',
-            info: {
-                age: '26',
-                weight: '65kg',
-            }
-        }
+      const testObj = {
+        name: "yc",
+        info: {
+          age: 26,
+          weight: "65kg",
+        },
+      };
 
-        const reactiveTestObj = reactive(testObj)
-        
-        reactiveTestObj.info
-       
+      const testObj1 = {
+        count: 0
+      };
+
+      const reactiveTestObj = reactive(testObj);
+      const reactiveTestObj1 = reactive(testObj1);
+
+
+      const addAge = () => {
+        /* reactiveTestObj.info.age++; */
+        reactiveTestObj1.count++
+      };
+
+      const clear = watchEffect(() => {
+        /* console.log("watchEffect执行", testObj.info.age); */
+        console.log("watchEffect执行", testObj1.count);
+      });      
+
+      document.getElementById("addAgeBtn").addEventListener("click", addAge);
+      document.getElementById("clearBtn").addEventListener("click", clear);
     </script>
-</body>
+  </body>
 </html>
